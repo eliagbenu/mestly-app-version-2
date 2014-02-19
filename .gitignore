@@ -1,0 +1,14 @@
+*.class
+*.html
+*.zargo~
+*.ser
+*.json
+*.txt
+
+target/
+db.properties
+
+# Package Files #
+*.jar
+*.war
+*.ear
