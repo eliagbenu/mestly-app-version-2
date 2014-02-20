@@ -251,8 +251,8 @@ public class UserManager{
 
 
         String statement1 = "Delete "+
-                            "from  user_tag"+
-                            " where user_id in ( "+
+                            "from  user_tag "+
+                            " where user_id = ( "+
                              "   select user_id from users where username = '"+username+"'"+
                               "  ) and tag = '" +tag+ "' ";
 
