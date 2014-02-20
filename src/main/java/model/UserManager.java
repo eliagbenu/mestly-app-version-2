@@ -256,10 +256,9 @@ public class UserManager{
                              "   select user_id from users where username = '"+username+"'"+
                               "  ) and tag = '" +tag+ "' ";
 
-    System.out.println(statement1);
-        try{
+         try{
         pst = con.prepareStatement(statement1);
-        rs = pst.executeQuery();            
+        pst.executeUpdate();   
         }catch(SQLException ex){
             ex.printStackTrace();
         }
