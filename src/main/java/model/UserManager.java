@@ -276,6 +276,7 @@ public class UserManager{
                             "where users.username='"+username+"'";
 
 
+        try{
         pst = con.prepareStatement(statement1);
         rs = pst.executeQuery();
 
@@ -287,7 +288,11 @@ public class UserManager{
             tagList.add(tag);             
         }
 
-        return tagList ;
+        return tagList ;            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+
 
     }
 
