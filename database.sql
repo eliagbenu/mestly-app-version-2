@@ -113,17 +113,6 @@ INSERT INTO users (username,email,password,first_name,last_name,one_liner,locati
 VALUES 
 ('jackson','jackson@gm.com','123456','Jackson','Agbenu','An EIT','East Legon','An EIT at East Legon','1,3',1);
 
-INSERT INTO user_tag (uesr_id,tag) 
-VALUES 
-(1,'Blogger');
-
-INSERT INTO user_tag (uesr_id,tag) 
-VALUES 
-(3,'Adventurer');
-
-INSERT INTO user_tag (uesr_id,tag) 
-VALUES 
-(2,'Adventurer');
 
 INSERT INTO university (university_name,location,location_url,website) 
 VALUES 
