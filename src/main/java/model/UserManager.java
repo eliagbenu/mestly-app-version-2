@@ -224,14 +224,14 @@ public class UserManager{
             Integer user_id = rs.getInt(1);
 
             String statement4 = "INSERT INTO user_tag(user_id,tag)"+
-                               "VALUES("+user_id+", '"+tag+"' )";
+                               "VALUES(?, ?)";
 
             pst = con.prepareStatement(statement4);                    
-//            pst.setString(2, tag);
-  //          pst.setInt(1, user_id);
+            pst.setString(2, tag);
+            pst.setInt(1, user_id);
             pst.executeUpdate();        
 
-            ArrayList<String> tags = user.getTagList();
+            ArrayList<String> tags = getTagList(username);
             tags.add(tag);               
         }
 
