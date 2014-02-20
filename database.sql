@@ -25,7 +25,7 @@ theme_id INT
 
 
 CREATE TABLE user_tag(
-user_id INT NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
+user_id INT NOT NULL users (user_id),
 tag VARCHAR(45) NOT NULL,
 CONSTRAINT chkUserTag UNIQUE(user_id,tag),
 PRIMARY KEY(user_id,tag)
