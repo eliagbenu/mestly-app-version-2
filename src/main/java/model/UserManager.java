@@ -288,9 +288,10 @@ public class UserManager{
             tagList.add(tag);             
         }
 
-        return tagList ;            
+        return tagList;            
         }catch(SQLException ex){
             ex.printStackTrace();
+            return null;
         }
 
 
