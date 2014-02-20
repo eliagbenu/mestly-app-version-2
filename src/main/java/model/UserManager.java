@@ -82,7 +82,8 @@ public class UserManager{
 
         while(rs.next()) {
             user = new User(rs.getString(1),rs.getString(2),username,
-                            rs.getString(4),rs.getString(5));            
+                            rs.getString(4),rs.getString(5));         
+           user.setTagList(getTagList(username));   
         }
         return user;
 
@@ -249,23 +250,47 @@ public class UserManager{
         User user = getUser(username);
 
 
+        String statement1 = "Delete "+
+                            "from  user_tag"+
+                            " where user_id in ( "+
+                             "   select user_id from users where username = '"+username+"'"+
+                              "  ) and tag = '" +tag+ "' ";
+
+    System.out.println(statement1);
+        try{
+        pst = con.prepareStatement(statement1);
+        rs = pst.executeQuery();            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+
+        
+    }
+
+
+
+ public static ArrayList<String> getTagList(String username) throws SQLException{
+        con = ConnectToPostgresSQL.connect();
+
         String statement1 = "select user_tag.user_id as uid,tag "+
                             "from users,user_tag "+
-                            "where users.username='"+username+"' and "+
-                            " tag = '"+tag+"'";
+                            "where users.username='"+username+"'";
+
 
         pst = con.prepareStatement(statement1);
         rs = pst.executeQuery();
 
+       ArrayList<String> tagList = new ArrayList<String>();
+
         while(rs.next()){     
-            ArrayList<String> tags=user.getTagList();
 
-            String statement2 = "delete from user_tag, user where username = '"+username+"' and tag= '"+tag+"'";
-
-            pst = con.prepareStatement(statement2);                    
-            pst.executeUpdate();        
-
+            String tag = rs.getString(2);
+            tagList.add(tag);             
         }
 
+        return tagList ;
+
     }
+
+
 }
