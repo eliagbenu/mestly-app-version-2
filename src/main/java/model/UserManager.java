@@ -283,7 +283,7 @@ public class UserManager{
 
         while(rs.next()){     
 
-            String tag = rs.getString(2);
+            String tag = rs.getString("tag");
             tagList.add(tag);             
         }
 
