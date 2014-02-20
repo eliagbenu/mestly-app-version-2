@@ -1,9 +1,3 @@
-/*
-script name: database.sql
-CREATE DATABASE mestly;
-\c mestly;
-*/
-
 CREATE TABLE users(
 user_id SERIAL PRIMARY KEY,
 username VARCHAR(45) UNIQUE,
@@ -20,7 +14,7 @@ theme_id INT
 
 
 CREATE TABLE user_tag(
-user_id INT NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
+user_id INT NOT NULL,
 tag VARCHAR(45) NOT NULL,
 CONSTRAINT chkUserTag UNIQUE(user_id,tag),
 PRIMARY KEY(user_id,tag)
