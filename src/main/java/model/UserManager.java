@@ -29,6 +29,10 @@ public class UserManager{
 
         con = ConnectToPostgresSQL.connect();
 
+        if(con==null){
+            return;
+        }
+
         String username= user.getUsername();
         String first_name= user.getFirstName();
         String last_name=user.getLastName();
@@ -65,6 +69,10 @@ public class UserManager{
         String password="";
 
         con = ConnectToPostgresSQL.connect();
+
+        if(con==null){
+            return null;
+        }
 
         String statement = "select first_name,last_name,username,email,password "+
                                     "from users where username= '"+username+"'";
@@ -107,6 +115,10 @@ public class UserManager{
 
         con = ConnectToPostgresSQL.connect();
 
+        if(con==null){
+            return false;
+        }
+
         String statement = "select first_name,last_name,username,email,password "+
                             "from users where username= '"+username+"' and "+
                             "email='"+email+"' ";
@@ -130,6 +142,10 @@ public class UserManager{
     public static boolean checkUserCredentials(String username, String password) throws SQLException{
 
         con = ConnectToPostgresSQL.connect();
+
+        if(con==null){
+            return false;
+        }
 
         String statement = "select first_name,last_name,username,email,password "+
                             "from users where username= '"+username+"' and "+
@@ -227,6 +243,29 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static void removeTag(String username, String tag) throws SQLException{
+        con = ConnectToPostgresSQL.connect();
+
+        //get user
+        User user = getUser(username);
+
+
+        String statement1 = "select user_tag.user_id as uid,tag "+
+                            "from users,user_tag "+
+                            "where users.username='"+username+"' and "+
+                            " tag = '"+tag+"'";
+
+        pst = con.prepareStatement(statement1);
+        rs = pst.executeQuery();
+
+        while(rs.next()){     
+            ArrayList<String> tags=user.getTagList();
+
+            String statement2 = "delete from user_tag, user where username = '"+username+"' and tag= '"+tag+"'";
+
+            pst = con.prepareStatement(statement2);                    
+            pst.executeUpdate();        
+
+        }
 
     }
 }

@@ -1,10 +1,8 @@
 /*
-script name: mest_queries.sql
-
-*/
+script name: database.sql
 CREATE DATABASE mestly;
-
 \c mestly;
+*/
 
 
 CREATE TABLE theme(

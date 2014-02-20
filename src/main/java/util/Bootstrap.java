@@ -34,7 +34,7 @@ public class Bootstrap {
 
 		//Properties props = DataManager.loadProperties();
 
-        String url = props.getProperty("dbInitial.url");
+        String url = props.getProperty("db.url");
         String dbuser = props.getProperty("db.user");
         String password = props.getProperty("db.passwd");
 
