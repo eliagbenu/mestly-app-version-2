@@ -16,16 +16,15 @@ import java.util.ArrayList;
 public class UserManager{
 
 
-    static PreparedStatement pst = null;
-    static ResultSet rs = null;
-    static Connection con = null;
-
     /**
     Adds user to the database
     @param user to be added
     @throws SQLException when querying the database fails
     */
 	public static void addUser(User user) throws SQLException{
+     PreparedStatement pst = null;
+     ResultSet rs = null;
+     Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
 
@@ -61,6 +60,10 @@ public class UserManager{
     */
     public static User getUser(String username) throws SQLException
     {
+     PreparedStatement pst = null;
+     ResultSet rs = null;
+     Connection con = null;
+
         User user = null;
 
         String first_name="";
@@ -75,7 +78,7 @@ public class UserManager{
         }
 
         String statement = "select first_name,last_name,username,email,password "+
-                                    "from users where username= '"+username+"'";
+                            "from users where username= '"+username+"'";
 
         pst = con.prepareStatement(statement);
         rs = pst.executeQuery();
@@ -95,6 +98,10 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static void deleteUser(String username) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
         con = ConnectToPostgresSQL.connect();
 
         String statement = "DELETE "+
@@ -113,6 +120,9 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static boolean areCredentialsInUse(String username, String email) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
 
@@ -121,7 +131,7 @@ public class UserManager{
         }
 
         String statement = "select first_name,last_name,username,email,password "+
-                            "from users where username= '"+username+"' and "+
+                            "from users where username= '"+username+"' or "+
                             "email='"+email+"' ";
 
         pst = con.prepareStatement(statement);
@@ -141,6 +151,9 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static boolean checkUserCredentials(String username, String password) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
 
@@ -168,6 +181,9 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static void updatePassword(User user) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
 
@@ -190,51 +206,25 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static void addTag(String username, String tag) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
 
         //get user
         User user = getUser(username);
 
-        String first_name= user.getFirstName();
-        String last_name=user.getLastName();
-        String email=user.getEmail();
-        String password=user.getPassword();
+        String statement = "INSERT INTO user_tag(username,tag)"+
+                            "VALUES(?, ?)";
 
-        String statement1 = "select user_tag.user_id as uid,tag "+
-                            "from users,user_tag "+
-                            "where users.username='"+username+"' and "+
-                            " tag = '"+tag+"'";
+        pst = con.prepareStatement(statement);                    
+        pst.setString(2, tag);
+        pst.setString(1, username);
+        pst.executeUpdate();        
 
-        pst = con.prepareStatement(statement1);
-        rs = pst.executeQuery();
-
-        while(rs.next()){          
-            return;
-        }
-
-        String statement2 = "select user_id "+
-                            "from users "+
-                            "where username='"+username+"'";
-
-        pst = con.prepareStatement(statement2);
-        rs = pst.executeQuery();
-
-        while(rs.next()){
-            Integer user_id = rs.getInt(1);
-
-            String statement4 = "INSERT INTO user_tag(user_id,tag)"+
-                               "VALUES(?, ?)";
-
-            pst = con.prepareStatement(statement4);                    
-            pst.setString(2, tag);
-            pst.setInt(1, user_id);
-            pst.executeUpdate();        
-
-            ArrayList<String> tags = getTagList(username);
-            tags.add(tag);               
-        }
-
+        ArrayList<String> tags = getTagList(username);
+        tags.add(tag);               
     }
 
     /**
@@ -244,6 +234,10 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
     public static void removeTag(String username, String tag) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
         con = ConnectToPostgresSQL.connect();
 
         //get user
@@ -252,9 +246,8 @@ public class UserManager{
 
         String statement1 = "Delete "+
                             "from  user_tag "+
-                            " where user_id = ( "+
-                             "   select user_id from users where username = '"+username+"'"+
-                              "  ) and tag = '" +tag+ "' ";
+                            " where username =  '"+username+"' and "+
+                            " tag= '" +tag+ "' ";
 
          try{
         pst = con.prepareStatement(statement1);
@@ -269,11 +262,15 @@ public class UserManager{
 
 
  public static ArrayList<String> getTagList(String username) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
         con = ConnectToPostgresSQL.connect();
 
-        String statement1 = "select user_tag.user_id as uid,tag "+
-                            "from users,user_tag "+
-                            "where users.username='"+username+"'";
+        String statement1 = "select * "+
+                            "from user_tag "+
+                            "where username='"+username+"'";
 
 
         try{
