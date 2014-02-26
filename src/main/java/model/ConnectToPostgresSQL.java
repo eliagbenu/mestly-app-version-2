@@ -36,9 +36,7 @@ public class ConnectToPostgresSQL
 
         } finally 
         {
-
-
-            
+        
             try {
                  if (in != null) {     
                      in.close();
