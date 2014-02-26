@@ -1,12 +1,5 @@
  DROP TABLE IF EXISTS users CASCADE;
  DROP TABLE IF EXISTS user_tag;
- DROP TABLE IF EXISTS university;
- DROP TABLE IF EXISTS theme;
- DROP TABLE IF EXISTS work;
- DROP TABLE IF EXISTS user_work;
- DROP TABLE IF EXISTS user_university;
- DROP TABLE IF EXISTS supported_services;
- DROP TABLE IF EXISTS user_supported_services;
  
 
 CREATE TABLE users(

@@ -22,10 +22,8 @@ public class UserManager{
     @throws SQLException when querying the database fails
     */
 	public static void addUser(User user) throws SQLException{
-     PreparedStatement pst = null;
-     ResultSet rs = null;
-     Connection con = null;
-
+        PreparedStatement pst = null;
+        Connection con = null;
         con = ConnectToPostgresSQL.connect();
 
         if(con==null){
@@ -38,18 +36,32 @@ public class UserManager{
         String email=user.getEmail();
         String password=user.getPassword();
 
-        String statement = "INSERT INTO users(first_name,last_name,email,password,username)"+
-                           "VALUES(?, ?, ?, ?, ?)";
+        try{
+            String statement = "INSERT INTO users(first_name,last_name,email,password,username)"+
+                               "VALUES(?, ?, ?, ?, ?)";
 
-        pst = con.prepareStatement(statement);
+            pst = con.prepareStatement(statement);
 
-        pst.setString(1, first_name);
-        pst.setString(2, last_name);                    
-        pst.setString(3, email);                    
-        pst.setString(4, password);                    
-        pst.setString(5, username);                    
+            pst.setString(1, first_name);
+            pst.setString(2, last_name);                    
+            pst.setString(3, email);                    
+            pst.setString(4, password);                    
+            pst.setString(5, username);                    
 
-        pst.executeUpdate();        
+            pst.executeUpdate();        
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            try{
+                pst.close();
+                con.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }finally{
+                pst.close();
+                con.close();                
+            }
+        }
     }
 
     /**
@@ -60,9 +72,9 @@ public class UserManager{
     */
     public static User getUser(String username) throws SQLException
     {
-     PreparedStatement pst = null;
-     ResultSet rs = null;
-     Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
 
         User user = null;
 
@@ -77,18 +89,37 @@ public class UserManager{
             return null;
         }
 
-        String statement = "select first_name,last_name,username,email,password "+
-                            "from users where username= '"+username+"'";
+        try{
+            String statement = "select first_name,last_name,username,email,password "+
+                                "from users where username= ? ";
 
-        pst = con.prepareStatement(statement);
-        rs = pst.executeQuery();
+            pst = con.prepareStatement(statement);
+            pst.setString(1, username);                            
+            rs = pst.executeQuery();
 
-        while(rs.next()) {
-            user = new User(rs.getString(1),rs.getString(2),username,
-                            rs.getString(4),rs.getString(5));         
-           user.setTagList(getTagList(username));   
+            while(rs.next()) {
+                user = new User(rs.getString(1),rs.getString(2),username,
+                                rs.getString(4),rs.getString(5));         
+               user.setTagList(getTagList(username));   
+            }
+
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            try{
+                pst.close();
+                con.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }finally{
+                pst.close();
+                con.close();                
+                return user;                                        
+            }
+
         }
-        return user;
+
+
 
     }
 
@@ -104,12 +135,28 @@ public class UserManager{
 
         con = ConnectToPostgresSQL.connect();
 
-        String statement = "DELETE "+
-                           "FROM users "+
-                           "WHERE username='"+username+"'";
+        try{
+            String statement = "DELETE "+
+                               "FROM users "+
+                               "WHERE username=?";
+         
+            pst = con.prepareStatement(statement);
+            pst.setString(1, username);                            
+            pst.executeUpdate();
 
-        pst = con.prepareStatement(statement);
-        pst.executeUpdate();        
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            try{
+                pst.close();
+                con.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }finally{
+                pst.close();
+                con.close();                                        
+            }
+        }                           
     }
     
     /**
@@ -130,17 +177,31 @@ public class UserManager{
             return false;
         }
 
-        String statement = "select first_name,last_name,username,email,password "+
-                            "from users where username= '"+username+"' or "+
-                            "email='"+email+"' ";
+        String statement = "select count(*) as figure "+
+                            "from users where username= ? or "+
+                            "email=?  "+
+                            " having count(*) =1";
+        boolean truthValue=false;                    
 
-        pst = con.prepareStatement(statement);
-        rs = pst.executeQuery();
+        try{
+            pst = con.prepareStatement(statement);
+            pst = con.prepareStatement(statement);
+            pst.setString(1, username);                                    
+            pst.setString(2, email);                                            
+            rs = pst.executeQuery();
 
-        while(rs.next()) {
-            return true;            
+            while(rs.next()) {
+                truthValue = true;            
+            }
+            truthValue = false;
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            pst.close();
+            rs.close();
+            con.close();
+            return truthValue;
         }
-        return false;
     }
 
     /**
@@ -156,23 +217,34 @@ public class UserManager{
         Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
+        boolean truthValue=false;
 
         if(con==null){
             return false;
         }
 
-        String statement = "select first_name,last_name,username,email,password "+
-                            "from users where username= '"+username+"' and "+
-                            "password='"+password+"' ";
+        try{
+            String statement = "select first_name,last_name,username,email,password "+
+                "from users where username= ? and "+
+                "password=? ";
 
-        pst = con.prepareStatement(statement);
-        rs = pst.executeQuery();
+            pst = con.prepareStatement(statement);
+            pst.setString(1, username);                                    
+            pst.setString(2, password);                                                
+            rs = pst.executeQuery();
 
-        while(rs.next()) {
-            return true;            
+            while(rs.next()) {
+            truthValue= true;            
+            }
+
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            pst.close();
+            rs.close();
+            con.close();
+            return truthValue;
         }
-
-        return false;
     }
 
     /**
@@ -191,12 +263,20 @@ public class UserManager{
         String password=user.getPassword();
 
         String statement = "UPDATE users "+
-                           "SET  password = '"+password+"' "+
-                           "WHERE username='"+username+"'";
+                           "SET  password = ? "+
+                           "WHERE username=?";
 
-        pst = con.prepareStatement(statement);
-
-        pst.executeUpdate();    
+        try{
+            pst = con.prepareStatement(statement);
+            pst.setString(1,password);
+            pst.setString(2,username);
+            pst.executeUpdate();    
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            pst.close();
+            con.close();            
+        }
     }
 
     /**
@@ -218,13 +298,21 @@ public class UserManager{
         String statement = "INSERT INTO user_tag(username,tag)"+
                             "VALUES(?, ?)";
 
-        pst = con.prepareStatement(statement);                    
-        pst.setString(2, tag);
-        pst.setString(1, username);
-        pst.executeUpdate();        
 
-        ArrayList<String> tags = getTagList(username);
-        tags.add(tag);               
+        try{
+            pst = con.prepareStatement(statement);                    
+            pst.setString(2, tag);
+            pst.setString(1, username);
+            pst.executeUpdate();        
+
+            ArrayList<String> tags = getTagList(username);
+            tags.add(tag);       
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+        }finally{
+            pst.close();
+            con.close();
+        }        
     }
 
     /**
@@ -246,19 +334,22 @@ public class UserManager{
 
         String statement1 = "Delete "+
                             "from  user_tag "+
-                            " where username =  '"+username+"' and "+
-                            " tag= '" +tag+ "' ";
+                            " where username =  ? and "+
+                            " tag= ? ";
 
-         try{
-        pst = con.prepareStatement(statement1);
-        pst.executeUpdate();   
+        try{
+            pst = con.prepareStatement(statement1);
+            pst.setString(1,username);
+            pst.setString(2,tag);
+            pst.executeUpdate();   
         }catch(SQLException ex){
             ex.printStackTrace();
+        }finally{
+            pst.close();
+            con.close();
         }
-
         
     }
-
 
 
  public static ArrayList<String> getTagList(String username) throws SQLException{
@@ -267,6 +358,7 @@ public class UserManager{
         Connection con = null;
 
         con = ConnectToPostgresSQL.connect();
+        ArrayList<String> tagList = new ArrayList<String>();
 
         String statement1 = "select * "+
                             "from user_tag "+
@@ -277,8 +369,6 @@ public class UserManager{
         pst = con.prepareStatement(statement1);
         rs = pst.executeQuery();
 
-       ArrayList<String> tagList = new ArrayList<String>();
-
         while(rs.next()){     
 
             String tag = rs.getString("tag");
@@ -288,7 +378,11 @@ public class UserManager{
         return tagList;            
         }catch(SQLException ex){
             ex.printStackTrace();
-            return null;
+        }finally{
+            pst.close();
+            rs.close();
+            con.close();         
+            return tagList;   
         }
 
 
