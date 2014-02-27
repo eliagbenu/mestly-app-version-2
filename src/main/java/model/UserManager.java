@@ -51,15 +51,20 @@ public class UserManager{
             pst.executeUpdate();        
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
             try{
-                pst.close();
-                con.close();
-            }catch(Exception ex){
+                if(pst != null){
+                    pst.close();
+                }
+                
+                if(con != null){
+                    con.close();
+                }
+                
+            }catch(SQLException ex){
                 ex.printStackTrace();
-            }finally{
-                pst.close();
-                con.close();                
+                throw ex;
             }
         }
     }
@@ -105,16 +110,26 @@ public class UserManager{
 
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
             try{
-                pst.close();
-                con.close();
-            }catch(Exception ex){
+
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                
+                return user;
+            }catch(SQLException ex){
                 ex.printStackTrace();
-            }finally{
-                pst.close();
-                con.close();                
-                return user;                                        
+                throw ex;
             }
 
         }
@@ -146,15 +161,29 @@ public class UserManager{
 
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
             try{
                 pst.close();
                 con.close();
-            }catch(Exception ex){
+            }catch(SQLException ex){
                 ex.printStackTrace();
+                throw ex;
             }finally{
-                pst.close();
-                con.close();                                        
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+                }
             }
         }                           
     }
@@ -196,11 +225,22 @@ public class UserManager{
             truthValue = false;
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
-            pst.close();
-            rs.close();
-            con.close();
-            return truthValue;
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                return truthValue;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
         }
     }
 
@@ -239,11 +279,26 @@ public class UserManager{
 
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
-            pst.close();
-            rs.close();
-            con.close();
-            return truthValue;
+            try{
+
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                return truthValue;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
         }
     }
 
@@ -273,9 +328,22 @@ public class UserManager{
             pst.executeUpdate();    
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
-            pst.close();
-            con.close();            
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
         }
     }
 
@@ -309,9 +377,23 @@ public class UserManager{
             tags.add(tag);       
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
+            throw sqlEx;
         }finally{
-            pst.close();
-            con.close();
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
+
         }        
     }
 
@@ -344,9 +426,23 @@ public class UserManager{
             pst.executeUpdate();   
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw ex;
         }finally{
-            pst.close();
-            con.close();
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
+
         }
         
     }
@@ -378,15 +474,26 @@ public class UserManager{
         return tagList;            
         }catch(SQLException ex){
             ex.printStackTrace();
+            throw ex;
         }finally{
-            pst.close();
-            rs.close();
-            con.close();         
-            return tagList;   
+            try{
+
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                return tagList;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
         }
-
-
     }
-
-
 }
