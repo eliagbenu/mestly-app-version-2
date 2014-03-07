@@ -12,6 +12,7 @@ one_liner VARCHAR(45),
 location VARCHAR(45),
 short_bio VARCHAR(45),
 following VARCHAR(45),
+location VARCHAR(70),
 theme_id INT
 );
 

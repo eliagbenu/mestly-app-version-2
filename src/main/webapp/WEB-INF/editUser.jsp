@@ -15,9 +15,12 @@
     </script>
     <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>        
     <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
+      #map-canvas { 
+      	height:500px; 
+      	width:500px; 
+      	overflow:scroll;
+      	margin: 30px 0 0 20px;
+      }
     </style>
   </head>
   <body>
@@ -91,17 +94,24 @@
 					</div>
 
 			<div class="row">
+				<form action="updateLocation" method="post">
+					<div class="col-md-10 col-md-offset-2">
+						<h2 class="form-signin-heading">Update location</h2>	
+						<c:if test="${user.locationCo_ordinates == '' }">
+						Location is not set
+					</c:if>
+						<input name="location" type="hidden" value="${user.locationCo_ordinates}">
+						<button type="button" class="btn btn-primary">
+							Update location
+						</button>
+						     marker as well.		
+						<div id="map-canvas">
 
-				<div class="col-md-10">
+						</div>	
 
-				     A google map . marker as well.
-					
-					
-				</div>
+					</div>
 
-				<div class="col-md-2">update button for google map
-				</div>
-
+				</form>
 			</div>
 
 			<div class="row">
@@ -113,9 +123,7 @@
 
 		</div>
   	</div>
-
-	    <div id="map-canvas">
-
-	    </div>
+				
+	    
   </body>
 </html>

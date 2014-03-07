@@ -496,4 +496,54 @@ public class UserManager{
             }
         }
     }
+
+
+ public static ArrayList<String> getLocation(String username) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        con = ConnectToPostgresSQL.connect();
+        ArrayList<String> locationCo_ordinates = new ArrayList<String>();
+
+        String statement1 = "select location "+
+                            "from user "+
+                            "where username='"+username+"'";
+
+
+        try{
+        pst = con.prepareStatement(statement1);
+        rs = pst.executeQuery();
+
+        while(rs.next()){     
+
+            String location = rs.getString("location");
+            locationCo_ordinates.add(location);             
+        }
+
+        return locationCo_ordinates;            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+            throw ex;
+        }finally{
+            try{
+
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                return locationCo_ordinates;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
+        }
+    }    
 }

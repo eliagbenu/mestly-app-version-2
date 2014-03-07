@@ -14,6 +14,8 @@ public class User {
 
     /** set of tags describing this user*/
     private ArrayList<String> tagList;
+    private ArrayList<String> locationCo_ordinates;
+
 
     /**
         For now, we only use one constructor, but there will probably more constructors later.
@@ -37,6 +39,7 @@ public class User {
 
         // initiating tag list
         tagList = new ArrayList<String>();
+        locationCo_ordinates=new ArrayList<String>();
     }
 
     // getters and setters
@@ -97,6 +100,13 @@ public class User {
         this.tagList = tagList;
     }
 
+    public ArrayList<String> getlocationCo_ordinates() {
+        return this.locationCo_ordinates;
+    }
+
+    public void setlocationCo_ordinates(ArrayList<String> location) {
+        this.locationCo_ordinates = locationCo_ordinates;
+    }
     /*
     * UTILITY
     */   

@@ -17,11 +17,17 @@
 </head>
 <body>
 
-<p>
- on page load, make the list of users not visible, but upon clicking the “User Directory” <h1> (in the jumbotron div), the list collapses down to show the users in the directory (or a message that says “no users available”)
-</p>
 
-
-
+<div class="container">
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="user-directory-user-list">
+				 on page load, make the list of users not visible, but upon clicking the “User Directory” <h1> (in the jumbotron div), the list collapses down to show the users in the directory (or a message that says “no users available”)
+				</p>				
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
