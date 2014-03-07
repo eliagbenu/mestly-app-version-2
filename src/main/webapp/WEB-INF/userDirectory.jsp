@@ -14,16 +14,19 @@
 
 	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="static/css/stylesheet.css" rel="stylesheet" media="screen">
+    <script src="static/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="static/js/js_user_directory_eli.js" type="text/javascript"></script>        
 </head>
 <body>
 
-
+<c:import url="header.jsp"/>
 <div class="container">
 	<div class="jumbotron">
 		<div class="row">
 			<div class="col-sm-12">
+				<h1 class="user-directory-header">User Directory</h1>
 				<p class="user-directory-user-list">
-				 on page load, make the list of users not visible, but upon clicking the “User Directory” <h1> (in the jumbotron div), the list collapses down to show the users in the directory (or a message that says “no users available”)
+				list collapses to show list of users or no users in list
 				</p>				
 			</div>
 		</div>

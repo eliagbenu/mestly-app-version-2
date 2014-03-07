@@ -13,7 +13,10 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRHivIhkXUKCEKeED6vH8kqh2uyCLnQ4Y&sensor=true">
     </script>
-    <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>        
+    <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
+
+<!--	<link href="static/css/google_map_eli.css" rel="stylesheet" type="text/css">    
+-->
     <style type="text/css">
       #map-canvas { 
       	height:500px; 
