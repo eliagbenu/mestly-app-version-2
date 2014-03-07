@@ -5,10 +5,14 @@
 	<title>Settings</title>
 	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="static/css/stylesheet.css" rel="stylesheet" media="screen">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>	
 </head>
 <body> 
 	<c:import url="header.jsp"/>
 	<div class="container">
+
+		Modal Box - upon clicking the “Delete Account” button, trigger a modal box to pop up asking the user if he/she is sure about deleting the account (possible options should be “Yes” or “No”) then continue to process the delete account functionality based upon the user’s answer.
+
 		<div class ="jumbotron">			
 			<div class="row">
 				<div class="col-md-12">
@@ -51,36 +55,15 @@
 					<p class="text-center">This step cannot be undone</p>
 					<a type="button" class="btn btn-danger btn-lg btn-block" href="/delete">Delete</a>
 				</div>
+
 				<div class="col-md-7 col-md-offset-1">
-					<form method="post" action="/addTag" class="form-horizontal" role="form">
-						<h2 class="form-signin-heading">Edit Tags</h2>
-						<div class="row">
-							<div class="col-sm-10">
-						    	<input type="text" class="form-control" name="tag" placeholder="Use tags to describe who you are.">
-						    </div>
-							<div class="col-sm-2">
-						    	<button type="submit" class="btn btn-primary btn-block">Add</button>
-						    </div>
-					    </div>
-					</form>
-					<c:if test="${param.tagError != null}">
-						<div class="alert alert-danger alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							A tag must be at least 2 characters long.
-						</div>
-					</c:if>
-					<div class="row">
-						<div class="col-sm-12">
-							<c:forEach items="${user.tagList}" var="tag">
-								<a type="button" class="btn btn-primary tagButton" href="/removeTag?tag=${tag}" rows="5">${tag} <span class="glyphicon glyphicon-remove"></span></a>
-							</c:forEach>
-						</div>
-					</div>
+
 				</div>
+
 			</div>
 		</div>
 	</div>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>			
+
+
 </body>
 </html>

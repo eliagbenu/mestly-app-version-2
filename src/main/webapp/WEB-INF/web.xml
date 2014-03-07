@@ -76,6 +76,7 @@
 		<servlet-name>RemoveTag</servlet-name>
 		<url-pattern>/removeTag</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>Admin</servlet-name>
 		<servlet-class>controller.AdminServlet</servlet-class>
@@ -84,4 +85,33 @@
 		<servlet-name>Admin</servlet-name>
 		<url-pattern>/admin</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EditUser</servlet-name>
+		<servlet-class>controller.EditUserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditUser</servlet-name>
+		<url-pattern>/editUser</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>UserDirectory</servlet-name>
+		<servlet-class>controller.UserDirectoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserDirectory</servlet-name>
+		<url-pattern>/userDirectory</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewProfile</servlet-name>
+		<servlet-class>controller.ViewProfileServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewProfile</servlet-name>
+		<url-pattern>/user/*</url-pattern>
+	</servlet-mapping>
+
 </web-app>

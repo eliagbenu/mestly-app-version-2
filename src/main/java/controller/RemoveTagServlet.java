@@ -37,7 +37,7 @@ public class RemoveTagServlet extends HttpServlet{
 			}
 
 			UserManager.removeTag(user.getUsername(), (String)req.getParameter("tag"));
-			resp.sendRedirect("/settings");
+			resp.sendRedirect("/editUser");
 
 		}catch(SQLException sql){
 			req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);

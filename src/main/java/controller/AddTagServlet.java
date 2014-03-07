@@ -29,17 +29,17 @@ public class AddTagServlet extends HttpServlet{
 			}		
 
 			if(!Validators.isValidName((String)req.getParameter("tag"))){
-				resp.sendRedirect("/settings?tagError=true");
+				resp.sendRedirect("/editUser?tagError=true");
 				return;
 			}		
 			
 			if(!user.addTag((String)req.getParameter("tag"))){
-				resp.sendRedirect("/settings");
+				resp.sendRedirect("/editUser");
 				return;
 			}
 
 			UserManager.addTag(user.getUsername(), (String)req.getParameter("tag"));
-			resp.sendRedirect("/settings");
+			resp.sendRedirect("/editUser");
 			
 		}catch(SQLException sql){
 			req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);
