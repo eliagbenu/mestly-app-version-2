@@ -1,6 +1,6 @@
  DROP TABLE IF EXISTS users CASCADE;
  DROP TABLE IF EXISTS user_tag;
- 
+ DROP TABLE IF EXISTS user_location;
 
 CREATE TABLE users(
 username VARCHAR(45) UNIQUE PRIMARY KEY,
@@ -9,7 +9,6 @@ password VARCHAR(150),
 first_name VARCHAR(45),
 last_name VARCHAR(45),
 one_liner VARCHAR(45),
-location VARCHAR(70) NULL,
 short_bio VARCHAR(45),
 following VARCHAR(45),
 theme_id INT
@@ -23,6 +22,28 @@ CONSTRAINT chkUserTag UNIQUE(username,tag),
 PRIMARY KEY(username,tag)
 );
 
+
+CREATE TABLE user_location(
+username VARCHAR(45) NOT NULL REFERENCES users ON DELETE CASCADE,
+lat VARCHAR(45),
+lng VARCHAR(45),
+PRIMARY KEY(username)
+);
+
+
+/*create a trigger*/
+CREATE OR REPLACE FUNCTION user_location_insert() RETURNS TRIGGER AS $user_location_insert$ 
+BEGIN
+IF(TG_OP='INSERT') THEN
+INSERT INTO user_location(username)
+       VALUES (NEW.username);
+END IF;
+RETURN NEW;
+END;
+$user_location_insert$ LANGUAGE plpgsql;
+
+CREATE TRIGGER user_location_insert AFTER INSERT ON users
+FOR EACH ROW EXECUTE PROCEDURE user_location_insert();
 
 /*insert queries start here*/
 
@@ -45,4 +66,5 @@ VALUES
 INSERT INTO users (username,email,password,first_name,last_name,one_liner,short_bio,following,theme_id) 
 VALUES 
 ('jackson','jackson@gm.com','123456','Jackson','Agbenu','An EIT','An EIT at East Legon','1,3',1);
+
 

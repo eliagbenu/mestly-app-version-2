@@ -397,6 +397,7 @@ public class UserManager{
         }        
     }
 
+
     /**
     Removes for given user
     @param username identifiying the user
@@ -506,8 +507,8 @@ public class UserManager{
         con = ConnectToPostgresSQL.connect();
         ArrayList<String> locationCo_ordinates = new ArrayList<String>();
 
-        String statement1 = "select location "+
-                            "from user "+
+        String statement1 = "select lat,lng "+
+                            "from user_location "+
                             "where username='"+username+"'";
 
 
@@ -517,8 +518,11 @@ public class UserManager{
 
         while(rs.next()){     
 
-            String location = rs.getString("location");
-            locationCo_ordinates.add(location);             
+            String lat = rs.getString("lat");
+            String lng = rs.getString("lng");
+
+            locationCo_ordinates.add(lat);
+            locationCo_ordinates.add(lng);                         
         }
 
         return locationCo_ordinates;            
@@ -545,5 +549,55 @@ public class UserManager{
                 throw ex;
             }
         }
-    }    
+    } 
+
+//update the location
+    public static void updateLocation(String username, String lat,String lng) throws SQLException{
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        con = ConnectToPostgresSQL.connect();
+
+        //get user
+        User user = getUser(username);
+
+        String statement = "update user_location set "+
+                            " lat= ? ,"+
+                            " lng=? "+
+                            " where username = ?";
+
+        try{
+            pst = con.prepareStatement(statement);                    
+            pst.setString(2, lng);
+            pst.setString(1, lat);            
+            pst.setString(3, username);
+            
+            pst.executeUpdate();        
+
+            ArrayList<String> location = new ArrayList<String>();
+            location.add(lat);
+            location.add(lng);       
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+            throw sqlEx;
+        }finally{
+            try{
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
+
+        }        
+    }
+
 }

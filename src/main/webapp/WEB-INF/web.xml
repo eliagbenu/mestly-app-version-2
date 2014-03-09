@@ -60,6 +60,7 @@
 		<servlet-name>Delete</servlet-name>
 		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>AddTag</servlet-name>
 		<servlet-class>controller.AddTagServlet</servlet-class>
@@ -68,6 +69,7 @@
 		<servlet-name>AddTag</servlet-name>
 		<url-pattern>/addTag</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>RemoveTag</servlet-name>
 		<servlet-class>controller.RemoveTagServlet</servlet-class>
@@ -75,6 +77,15 @@
 	<servlet-mapping>
 		<servlet-name>RemoveTag</servlet-name>
 		<url-pattern>/removeTag</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UpdateLocation</servlet-name>
+		<servlet-class>controller.UpdateLocationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateLocation</servlet-name>
+		<url-pattern>/updateLocation</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

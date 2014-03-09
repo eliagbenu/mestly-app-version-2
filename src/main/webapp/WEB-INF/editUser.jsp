@@ -101,7 +101,7 @@
 					</div>
 
 			<div class="row">
-				<form action="updateLocation" method="post">
+				<form action="/updateLocation" method="post">
 					<div class="col-md-10 col-md-offset-2">
 						<h2 class="form-signin-heading">Update location</h2>							
 						<c:choose>
@@ -111,8 +111,7 @@
 							<script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   						    
 							<div id="unset-map-canvas">
 							</div>		
-							<input type="text" id="latField" name="latField">
-							<input type="text" id="lngField" name="lngField"> 											    
+ 											    
 						  </c:when>
 						  <c:otherwise>
 						      <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
@@ -123,14 +122,10 @@
 
 						<input name="location" type="hidden" value="${user.locationCo_ordinates}">
 					    
-						<button type="button" class="btn btn-primary">
-							Update location
-						</button>
-						     		
-						
-
+				    	<button type="submit" class="btn btn-primary">Update location</button>					
 					</div>
-
+					<input type="text" id="latField" name="latField">
+					<input type="text" id="lngField" name="lngField">
 				</form>
 			</div>
 
