@@ -3,13 +3,23 @@ var markersArray = [];
 
 function initialize()
 {
-	var latlng = new google.maps.LatLng(5.552281, -0.202196);	    
+
+
+    var Init_latField = document.getElementById("Init_latField").value;
+    var Init_lngField = document.getElementById("Init_lngField").value;
+
+	var latlng = new google.maps.LatLng(Init_latField, Init_lngField);	    
     var myOptions = {
         zoom: 8,
         center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("unset-map-canvas"), myOptions);
+
+    var marker = new google.maps.Marker({
+        position: latlng, 
+        map: map
+    });
 
     // add a click event handler to the map object
     google.maps.event.addListener(map, "click", function(event)

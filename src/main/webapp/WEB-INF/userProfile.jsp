@@ -3,6 +3,7 @@
 <html>
 <head>
   <title>Mestly Profile</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 
   <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">  
   <link href="/static/css/stylesheet.css" rel="stylesheet" media="screen">    

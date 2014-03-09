@@ -106,6 +106,7 @@ public class UserManager{
                 user = new User(rs.getString(1),rs.getString(2),username,
                                 rs.getString(4),rs.getString(5));         
                user.setTagList(getTagList(username));   
+               user.setLocationCo_ordinates(getLocationCo_ordinates(username));   
             }
 
         }catch(SQLException sqlEx){
@@ -490,6 +491,7 @@ public class UserManager{
                 if(con != null){
                     con.close();
                 }
+              //  System.out.println("tagList is "+tagList);
                 return tagList;
             }catch(SQLException ex){
                 ex.printStackTrace();
@@ -499,7 +501,7 @@ public class UserManager{
     }
 
 
- public static ArrayList<String> getLocation(String username) throws SQLException{
+ public static ArrayList<String> getLocationCo_ordinates(String username) throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs = null;
         Connection con = null;
@@ -507,7 +509,7 @@ public class UserManager{
         con = ConnectToPostgresSQL.connect();
         ArrayList<String> locationCo_ordinates = new ArrayList<String>();
 
-        String statement1 = "select lat,lng "+
+        String statement1 = "select * "+
                             "from user_location "+
                             "where username='"+username+"'";
 
@@ -517,12 +519,10 @@ public class UserManager{
         rs = pst.executeQuery();
 
         while(rs.next()){     
-
             String lat = rs.getString("lat");
             String lng = rs.getString("lng");
-
-            locationCo_ordinates.add(lat);
-            locationCo_ordinates.add(lng);                         
+            locationCo_ordinates.add(lat);         
+            locationCo_ordinates.add(lng);                        
         }
 
         return locationCo_ordinates;            
@@ -543,16 +543,19 @@ public class UserManager{
                 if(con != null){
                     con.close();
                 }
+
                 return locationCo_ordinates;
             }catch(SQLException ex){
                 ex.printStackTrace();
                 throw ex;
             }
         }
-    } 
+    }
+
+
 
 //update the location
-    public static void updateLocation(String username, String lat,String lng) throws SQLException{
+    public static void updateLocationCo_ordinates(String username, String lat,String lng) throws SQLException{
         PreparedStatement pst = null;
         ResultSet rs = null;
         Connection con = null;
@@ -572,12 +575,17 @@ public class UserManager{
             pst.setString(2, lng);
             pst.setString(1, lat);            
             pst.setString(3, username);
-            
+
             pst.executeUpdate();        
 
-            ArrayList<String> location = new ArrayList<String>();
-            location.add(lat);
-            location.add(lng);       
+            ArrayList<String> locationCo_ordinates = new ArrayList<String>();
+            locationCo_ordinates.add(0,lat);
+            locationCo_ordinates.add(1,lng); 
+
+            user.setLocationCo_ordinates(locationCo_ordinates);
+
+            System.out.println("The new location is "+locationCo_ordinates);
+
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
             throw sqlEx;

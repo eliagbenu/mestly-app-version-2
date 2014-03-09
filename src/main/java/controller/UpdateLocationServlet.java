@@ -28,7 +28,7 @@ public class UpdateLocationServlet extends HttpServlet{
 				return;
 			}		
 
-			UserManager.updateLocation(user.getUsername(), 
+			UserManager.updateLocationCo_ordinates(user.getUsername(), 
 				                     (String)req.getParameter("latField"),(String)req.getParameter("lngField"));
 			
 			resp.sendRedirect("/editUser");

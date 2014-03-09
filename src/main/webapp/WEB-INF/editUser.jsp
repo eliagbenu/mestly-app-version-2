@@ -13,22 +13,11 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRHivIhkXUKCEKeED6vH8kqh2uyCLnQ4Y&sensor=true">
     </script>
-    <!--
-    <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
-    <script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   
--->
+
 	<link href="static/css/google_map_eli.css" rel="stylesheet" type="text/css">    
 	<link href="static/css/stylesheet_eli.css" rel="stylesheet" type="text/css">    
 
-<!--
-    <style type="text/css">
-      #map-canvas { 
-      	height:500px; 
-      	width:500px; 
-      	overflow:scroll;
-      	margin: 30px 0 0 20px;
-      }
-    </style>-->
+
   </head>
   <body>
 
@@ -101,37 +90,39 @@
 					</div>
 
 			<div class="row">
-				<form action="/updateLocation" method="post">
+				<form action="/updateLocation" method="post" class="form-horizontal" role="form">
 					<div class="col-md-10 col-md-offset-2">
-						<h2 class="form-signin-heading">Update location</h2>							
+						<h2 class="form-signin-heading">Update location</h2>	
+						Location is ${user.locationCo_ordinates}  
+
 						<c:choose>
-						  <c:when test="${user.locationCo_ordinates.size() == 0 }">
+						  <c:when test="${user.locationCo_ordinates.get(0) == null }">
 						    <p class='my_error'> Your location is not set</p>
 
-							<script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   						    
-							<div id="unset-map-canvas">
-							</div>		
- 											    
 						  </c:when>
 						  <c:otherwise>
-						      <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
-							<div id="map-canvas">
-							</div>	
+						    <p class='my_info'> Update your location from latitude ${user.locationCo_ordinates.get(0)} and longitude ${user.locationCo_ordinates.get(1)}</p>						  
 						  </c:otherwise>
 						</c:choose>
 
-						<input name="location" type="hidden" value="${user.locationCo_ordinates}">
-					    
+						<script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   						    
+						<div id="unset-map-canvas">
+						</div>		
+
 				    	<button type="submit" class="btn btn-primary">Update location</button>					
 					</div>
-					<input type="text" id="latField" name="latField">
-					<input type="text" id="lngField" name="lngField">
+					<input type="hidden" id="Init_latField" name="Init_latField" value="${user.locationCo_ordinates.get(0)}">
+					<input type="hidden" id="Init_lngField" name="Init_lngField" value="${user.locationCo_ordinates.get(1)}">
+
+					<input type="hidden" id="latField" name="latField" >
+					<input type="hidden" id="lngField" name="lngField">
 				</form>
 			</div>
 
 			<div class="row">
 				<div class="col-md-3">
-					<button type="button" class="btn btn-primary" id="save-all-changes" data-loading-text="Saving...">Save Changes
+					<button type="button" class="btn btn-primary" id="save-all-changes" 
+					        data-loading-text="Saving...">Save Changes
 					</button>		
 				</div>
 			</div>

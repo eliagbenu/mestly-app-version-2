@@ -16,7 +16,6 @@ public class User {
     private ArrayList<String> tagList;
     private ArrayList<String> locationCo_ordinates;
 
-
     /**
         For now, we only use one constructor, but there will probably more constructors later.
         The constructor initializes the user object with the passed values, initializes all lists maintained
@@ -100,13 +99,14 @@ public class User {
         this.tagList = tagList;
     }
 
-    public ArrayList<String> getlocationCo_ordinates() {
+    public ArrayList<String> getLocationCo_ordinates() {
         return this.locationCo_ordinates;
     }
 
-    public void setlocationCo_ordinates(ArrayList<String> location) {
+    public void setLocationCo_ordinates(ArrayList<String> locationCo_ordinates) {
         this.locationCo_ordinates = locationCo_ordinates;
     }
+
     /*
     * UTILITY
     */   
