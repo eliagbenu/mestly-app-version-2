@@ -13,10 +13,14 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRHivIhkXUKCEKeED6vH8kqh2uyCLnQ4Y&sensor=true">
     </script>
+    <!--
     <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
-
-<!--	<link href="static/css/google_map_eli.css" rel="stylesheet" type="text/css">    
+    <script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   
 -->
+	<link href="static/css/google_map_eli.css" rel="stylesheet" type="text/css">    
+	<link href="static/css/stylesheet_eli.css" rel="stylesheet" type="text/css">    
+
+<!--
     <style type="text/css">
       #map-canvas { 
       	height:500px; 
@@ -24,7 +28,7 @@
       	overflow:scroll;
       	margin: 30px 0 0 20px;
       }
-    </style>
+    </style>-->
   </head>
   <body>
 
@@ -99,18 +103,31 @@
 			<div class="row">
 				<form action="updateLocation" method="post">
 					<div class="col-md-10 col-md-offset-2">
-						<h2 class="form-signin-heading">Update location</h2>	
-						<c:if test="${user.locationCo_ordinates == '' }">
-						Location is not set
-					</c:if>
+						<h2 class="form-signin-heading">Update location</h2>							
+						<c:choose>
+						  <c:when test="${user.locationCo_ordinates.size() == 0 }">
+						    <p class='my_error'> Your location is not set</p>
+
+							<script src="static/js/js_google_unset_map_eli.js" type="text/javascript"></script>   						    
+							<div id="unset-map-canvas">
+							</div>		
+							<input type="text" id="latField" name="latField">
+							<input type="text" id="lngField" name="lngField"> 											    
+						  </c:when>
+						  <c:otherwise>
+						      <script src="static/js/js_google_map_eli.js" type="text/javascript"></script>   
+							<div id="map-canvas">
+							</div>	
+						  </c:otherwise>
+						</c:choose>
+
 						<input name="location" type="hidden" value="${user.locationCo_ordinates}">
+					    
 						<button type="button" class="btn btn-primary">
 							Update location
 						</button>
-						     marker as well.		
-						<div id="map-canvas">
-
-						</div>	
+						     		
+						
 
 					</div>
 

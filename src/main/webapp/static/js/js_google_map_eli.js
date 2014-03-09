@@ -11,7 +11,7 @@ function initialize() {
   mapOptions);
 
 
-custIcon = 'static/img/bulbgrey.png';
+custIcon = '/static/img/bulbgrey.png';
 var myLocation = new google.maps.Marker({
       position: myLatlng,
       map: map,

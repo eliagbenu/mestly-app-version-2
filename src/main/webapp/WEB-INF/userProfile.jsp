@@ -23,7 +23,9 @@
     <div class="jumbotron">
     	<div class="row">
 	      <div class="col-sm-12">
-			<p>Map stuff here</p>
+		      	<div id="map-canvas">
+
+            </div>
 	      </div>
     	</div>
       

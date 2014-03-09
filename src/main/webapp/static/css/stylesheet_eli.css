@@ -1,2 +1,5 @@
-#map-canvas { height: 100% }
+.my_error{
+	background-color: #FF7F50;
+	border-radius: 5px;
+}
 
