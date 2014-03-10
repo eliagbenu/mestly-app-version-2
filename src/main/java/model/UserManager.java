@@ -629,8 +629,8 @@ public class UserManager{
                             " where username = ?";
 
         ArrayList<String> locationCo_ordinates = new ArrayList<String>();
-        locationCo_ordinates.add(lat);
-        locationCo_ordinates.add(lng); 
+        locationCo_ordinates.add(0,lat);
+        locationCo_ordinates.add(1,lng); 
 
         user.setLocationCo_ordinates(locationCo_ordinates);
 
