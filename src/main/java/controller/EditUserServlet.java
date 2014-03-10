@@ -23,11 +23,6 @@ public class EditUserServlet extends HttpServlet{
 				User user = UserManager.getUser((String)req.getSession().getAttribute("username"));
 				req.setAttribute("user",user);
 
-			//troubleshooting
-				req.setAttribute("lat",req.getSession().getAttribute("lat"));
-				req.setAttribute("this_username",req.getSession().getAttribute("this_username"));
-			//troubleshooting
-
 				req.getRequestDispatcher("WEB-INF/editUser.jsp").forward(req, resp);			
 			}else{
 				resp.sendRedirect("/signin?next="+req.getRequestURI());

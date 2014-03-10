@@ -625,13 +625,15 @@ public class UserManager{
 
         String statement = "update user_location set "+
                             " lat= ? ,"+
-                            " lng=? "+
+                            " lng= ? "+
                             " where username = ?";
 
         ArrayList<String> locationCo_ordinates = new ArrayList<String>();
         locationCo_ordinates.add(lat);
         locationCo_ordinates.add(lng); 
 
+        System.out.println("location co is "+locationCo_ordinates);
+        
         user.setLocationCo_ordinates(locationCo_ordinates);
 
         try{

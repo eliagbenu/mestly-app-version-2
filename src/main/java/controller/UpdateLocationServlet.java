@@ -34,11 +34,6 @@ public class UpdateLocationServlet extends HttpServlet{
 
 			UserManager.updateLocationCo_ordinates(username,lat,lng);
 			
-			//troubleshooting
-			req.getSession().setAttribute("lat",lat);
-			req.getSession().setAttribute("this_username",username);			
-			//troubleshooting
-
 			resp.sendRedirect("/editUser");
 			
 		}catch(SQLException sql){
