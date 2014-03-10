@@ -139,6 +139,66 @@ public class UserManager{
 
     }
 
+    /*get all users*/
+    public static ArrayList<String> getAllUsers() throws SQLException
+    {
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Connection con = null;
+
+        ArrayList<String> allUsers = new ArrayList<String>(); 
+
+        con = ConnectToPostgresSQL.connect();
+
+        if(con==null){
+            return null;
+        }
+
+        try{
+            String statement = "select username"+
+                                " from users";
+
+            pst = con.prepareStatement(statement);
+            rs = pst.executeQuery();
+
+            while(rs.next()) {
+
+                String this_user = rs.getString("username");
+                allUsers.add(this_user);
+
+               //user.setTagList(getTagList(username));   
+               //user.setLocationCo_ordinates(getLocationCo_ordinates(username));   
+            }
+
+        }catch(SQLException sqlEx){
+            sqlEx.printStackTrace();
+            throw sqlEx;
+        }finally{
+            try{
+
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(pst != null){
+                    pst.close();
+                }
+
+                if(con != null){
+                    con.close();
+                }
+                
+                return allUsers;
+            }catch(SQLException ex){
+                ex.printStackTrace();
+                throw ex;
+            }
+
+        }
+
+
+
+    }
     /**
     Deletes a user and everything associated with that entity from the database
     @param user to be deleted

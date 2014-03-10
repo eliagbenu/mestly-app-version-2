@@ -26,7 +26,14 @@
 			<div class="col-sm-12">
 				<h1 class="user-directory-header">User Directory</h1>
 				<p class="user-directory-user-list">
-				list collapses to show list of users or no users in list
+
+					<c:if test="${allUsers.size()==0}">
+						There are no users in list
+				    </c:if>
+
+    				<c:forEach items="${allUsers}" var="thisUser">
+						<u>${thisUser}</u><br/>
+					</c:forEach>
 				</p>				
 			</div>
 		</div>
