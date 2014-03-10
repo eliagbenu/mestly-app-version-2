@@ -39,6 +39,8 @@ public class User {
         // initiating tag list
         tagList = new ArrayList<String>();
         locationCo_ordinates=new ArrayList<String>();
+        locationCo_ordinates.add(null);
+        locationCo_ordinates.add(null);
     }
 
     // getters and setters
