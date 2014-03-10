@@ -28,11 +28,15 @@ public class UpdateLocationServlet extends HttpServlet{
 				return;
 			}		
 
-			UserManager.updateLocationCo_ordinates(user.getUsername(), 
-				                     (String)req.getParameter("latField"),(String)req.getParameter("lngField"));
+			String lat = (String)req.getParameter("latField");
+			String lng = (String)req.getParameter("lngField");
+
+			UserManager.updateLocationCo_ordinates(user.getUsername(),lat,lng);
 			
-//			resp.sendRedirect("/editUser");
-			resp.sendRedirect("/dashboard");
+
+			req.getSession().setAttribute("lat",lat);
+
+			resp.sendRedirect("/editUser");
 			
 		}catch(SQLException sql){
 			req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);

@@ -95,6 +95,7 @@
 						<h2 class="form-signin-heading">Update location</h2>	
 						Co ordinates are ${user.locationCo_ordinates}
 						Size is ${user.locationCo_ordinates.size()}
+						Lat is ${lat}
 
 						<c:choose>
 						  <c:when test="${user.locationCo_ordinates.size() == 0}">
