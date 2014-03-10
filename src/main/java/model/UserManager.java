@@ -166,8 +166,6 @@ public class UserManager{
                 String this_user = rs.getString("username");
                 allUsers.add(this_user);
 
-               //user.setTagList(getTagList(username));   
-               //user.setLocationCo_ordinates(getLocationCo_ordinates(username));   
             }
 
         }catch(SQLException sqlEx){
@@ -635,7 +633,7 @@ public class UserManager{
         locationCo_ordinates.add(1,lng); 
 
         user.setLocationCo_ordinates(locationCo_ordinates);
-        
+
         try{
             pst = con.prepareStatement(statement);                    
             pst.setString(2, lng);
