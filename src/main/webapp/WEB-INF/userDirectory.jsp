@@ -24,9 +24,9 @@
 	<div class="jumbotron">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1 class="user-directory-header">User Directory</h1>
-				<p class="user-directory-user-list">
-
+				<h1 data-toggle="collapse" data-target="#user-directory-user-list">User Directory</h1>
+				<div id="user-directory-user-list" class="collapse in">
+					
 					<c:if test="${allUsers.size()==0}">
 						There are no users in list
 				    </c:if>
@@ -34,7 +34,7 @@
     				<c:forEach items="${allUsers}" var="thisUser">
 						<u>${thisUser}</u><br/>
 					</c:forEach>
-				</p>				
+				</div>				
 			</div>
 		</div>
 	</div>
