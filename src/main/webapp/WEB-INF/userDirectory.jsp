@@ -15,6 +15,8 @@
 	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="static/css/stylesheet.css" rel="stylesheet" media="screen">
     <script src="static/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script src="static/js/bootstrap.min.js" type="text/javascript"></script>	    
+    
     <script src="static/js/js_user_directory_eli.js" type="text/javascript"></script>        
 </head>
 <body>
