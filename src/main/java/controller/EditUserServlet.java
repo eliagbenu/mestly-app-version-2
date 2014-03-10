@@ -23,7 +23,9 @@ public class EditUserServlet extends HttpServlet{
 				User user = UserManager.getUser((String)req.getSession().getAttribute("username"));
 				req.setAttribute("user",user);
 
+
 				req.setAttribute("lat",req.getSession().getAttribute("lat"));
+
 
 				req.getRequestDispatcher("WEB-INF/editUser.jsp").forward(req, resp);			
 			}else{
