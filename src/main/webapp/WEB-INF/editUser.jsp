@@ -97,10 +97,17 @@
 						<c:choose>
 						  <c:when test="${user.locationCo_ordinates.size() == 0}">
 						    <p class='my_error'> Your location is not set</p>
-
+	
+						<input type="hidden" id="Init_latField" name="Init_latField" >
+						<input type="hidden" id="Init_lngField" name="Init_lngField" >
+	
 						  </c:when>
 						  <c:otherwise>
-						    <div class='my_info'>Update your location from latitude ${user.locationCo_ordinates.get(0)} and longitude ${user.locationCo_ordinates.get(1)}</div>						  
+						    <div class='my_info'>Update your location from latitude ${user.locationCo_ordinates.get(0)} and longitude ${user.locationCo_ordinates.get(1)}</div>	
+
+    					<input type="hidden" id="Init_latField" name="Init_latField" value="${user.locationCo_ordinates.get(0)}">
+						<input type="hidden" id="Init_lngField" name="Init_lngField" value="${user.locationCo_ordinates.get(1)}">
+					  
 						  </c:otherwise>
 						</c:choose>
 
@@ -110,8 +117,6 @@
 
 				    	<button type="submit" class="btn btn-primary">Update location</button>					
 					</div>
-					<input type="hidden" id="Init_latField" name="Init_latField" value="${user.locationCo_ordinates.get(0)}">
-					<input type="hidden" id="Init_lngField" name="Init_lngField" value="${user.locationCo_ordinates.get(1)}">
 
 					<input type="hidden" id="latField" name="latField" >
 					<input type="hidden" id="lngField" name="lngField">
