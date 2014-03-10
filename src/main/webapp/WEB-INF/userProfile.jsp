@@ -26,6 +26,23 @@
 	      <div class="col-sm-12">
             <h2 class="form-signin-heading">View Profile</h2>  
 
+
+            <c:choose>
+              <c:when test="${user.locationCo_ordinates.get(0) == null }">
+            
+            <input type="hidden" id="Init1_latField">
+            <input type="hidden" id="Init1_lngField">
+
+
+              </c:when>
+              <c:otherwise>
+            
+            <input type="hidden" id="Init1_latField" value="${user.locationCo_ordinates.get(0)}">
+            <input type="hidden" id="Init1_lngField" value="${user.locationCo_ordinates.get(1)}">
+
+              </c:otherwise>
+            </c:choose>
+
             <input type="hidden" id="Init1_latField" value="${user.locationCo_ordinates.get(0)}">
             <input type="hidden" id="Init1_lngField" value="${user.locationCo_ordinates.get(1)}">
 
