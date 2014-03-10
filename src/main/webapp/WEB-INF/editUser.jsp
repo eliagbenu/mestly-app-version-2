@@ -98,7 +98,7 @@
 						Lat is ${lat}
 
 						<c:choose>
-						  <c:when test="${user.locationCo_ordinates.size() == 0 && lat==null }">
+						  <c:when test="${user.locationCo_ordinates.size() == 0}">
 						    <p class='my_error'> Your location is not set</p>
 	
 						<input type="hidden" id="Init_latField" name="Init_latField" >

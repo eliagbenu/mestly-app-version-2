@@ -630,6 +630,12 @@ public class UserManager{
                             " lng=? "+
                             " where username = ?";
 
+        ArrayList<String> locationCo_ordinates = new ArrayList<String>();
+        locationCo_ordinates.add(0,lat);
+        locationCo_ordinates.add(1,lng); 
+
+        user.setLocationCo_ordinates(locationCo_ordinates);
+        
         try{
             pst = con.prepareStatement(statement);                    
             pst.setString(2, lng);
@@ -637,12 +643,6 @@ public class UserManager{
             pst.setString(3, username);
 
             pst.executeUpdate();        
-
-            ArrayList<String> locationCo_ordinates = new ArrayList<String>();
-            locationCo_ordinates.add(0,lat);
-            locationCo_ordinates.add(1,lng); 
-
-            user.setLocationCo_ordinates(locationCo_ordinates);
 
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
