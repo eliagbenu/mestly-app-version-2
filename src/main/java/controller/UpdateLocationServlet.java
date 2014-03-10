@@ -22,7 +22,8 @@ public class UpdateLocationServlet extends HttpServlet{
 
 		try{
 			User user = UserManager.getUser((String)req.getSession().getAttribute("username"));
-			
+			String username = (String)req.getSession().getAttribute("username");
+
 			if(user == null){
 				req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);
 				return;
@@ -31,10 +32,12 @@ public class UpdateLocationServlet extends HttpServlet{
 			String lat = (String)req.getParameter("latField");
 			String lng = (String)req.getParameter("lngField");
 
-			UserManager.updateLocationCo_ordinates(user.getUsername(),lat,lng);
+			UserManager.updateLocationCo_ordinates(username,lat,lng);
 			
-
+			//troubleshooting
 			req.getSession().setAttribute("lat",lat);
+			req.getSession().setAttribute("this_username",username);			
+			//troubleshooting
 
 			resp.sendRedirect("/editUser");
 			

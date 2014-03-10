@@ -96,6 +96,7 @@
 						Co ordinates are ${user.locationCo_ordinates}
 						Size is ${user.locationCo_ordinates.size()}
 						Lat is ${lat}
+						This user is ${this_username}
 
 						<c:choose>
 						  <c:when test="${user.locationCo_ordinates.size() == 0}">
