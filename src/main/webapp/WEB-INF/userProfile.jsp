@@ -28,7 +28,7 @@
 
 
             <c:choose>
-              <c:when test="${user.locationCo_ordinates.get(0) == null }">
+              <c:when test="${user.locationCo_ordinates.size() == 0 }">
             
             <input type="hidden" id="Init1_latField">
             <input type="hidden" id="Init1_lngField">
@@ -43,8 +43,6 @@
               </c:otherwise>
             </c:choose>
 
-            <input type="hidden" id="Init1_latField" value="${user.locationCo_ordinates.get(0)}">
-            <input type="hidden" id="Init1_lngField" value="${user.locationCo_ordinates.get(1)}">
 
             <script src="/static/js/js_google_plain_map_eli.js" type="text/javascript"></script>                   
             <div id="map-canvas">
