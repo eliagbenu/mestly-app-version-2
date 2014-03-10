@@ -120,7 +120,7 @@
 						<input type="hidden" id="latField" name="latField" >
 						<input type="hidden" id="lngField" name="lngField">
 
-				    	<button type="submit" class="btn btn-primary">Update location</button>					
+				    	<input type="submit" class="btn btn-primary" value="Update location">					
 					</div>
 
 				</form>
