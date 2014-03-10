@@ -117,11 +117,12 @@
 						<div id="unset-map-canvas">
 						</div>		
 
+						<input type="hidden" id="latField" name="latField" >
+						<input type="hidden" id="lngField" name="lngField">
+
 				    	<button type="submit" class="btn btn-primary">Update location</button>					
 					</div>
 
-					<input type="hidden" id="latField" name="latField" >
-					<input type="hidden" id="lngField" name="lngField">
 				</form>
 			</div>
 
