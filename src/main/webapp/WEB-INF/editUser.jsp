@@ -93,9 +93,10 @@
 				<form action="/updateLocation" method="post" class="form-horizontal" role="form">
 					<div class="col-md-10 col-md-offset-2">
 						<h2 class="form-signin-heading">Update location</h2>	
-
+						${user.locationCo_ordinates}
+						${user.locationCo_ordinates.get(0)}
 						<c:choose>
-						  <c:when test="${user.locationCo_ordinates.size() == 0}">
+						  <c:when test="${user.locationCo_ordinates.get(0) == null}">
 						    <p class='my_error'> Your location is not set</p>
 	
 						<input type="hidden" id="Init_latField" name="Init_latField" >

@@ -632,8 +632,6 @@ public class UserManager{
         locationCo_ordinates.add(lat);
         locationCo_ordinates.add(lng); 
 
-        System.out.println("location co is "+locationCo_ordinates);
-        
         user.setLocationCo_ordinates(locationCo_ordinates);
 
         try{
