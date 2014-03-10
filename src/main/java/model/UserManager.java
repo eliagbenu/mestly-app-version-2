@@ -624,9 +624,9 @@ public class UserManager{
         User user = getUser(username);
 
         String statement = "update user_location set "+
-                            " lat= ? ,"+
-                            " lng= ? "+
-                            " where username = ?";
+                            " lat = ? ,"+
+                            " lng = ? "+
+                            " where username = ? ";
 
         ArrayList<String> locationCo_ordinates = new ArrayList<String>();
         locationCo_ordinates.add(0,lat);
