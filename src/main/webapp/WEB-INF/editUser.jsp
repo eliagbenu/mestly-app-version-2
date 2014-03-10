@@ -94,6 +94,8 @@
 					<div class="col-md-10 col-md-offset-2">
 						<h2 class="form-signin-heading">Update location</h2>	
 						Co ordinates are ${user.locationCo_ordinates}
+						Size is ${user.locationCo_ordinates.size()}
+						
 						<c:choose>
 						  <c:when test="${user.locationCo_ordinates == null || user.locationCo_ordinates.size() == 0}">
 						    <p class='my_error'> Your location is not set</p>
