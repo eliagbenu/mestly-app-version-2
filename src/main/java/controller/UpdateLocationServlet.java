@@ -31,7 +31,8 @@ public class UpdateLocationServlet extends HttpServlet{
 			UserManager.updateLocationCo_ordinates(user.getUsername(), 
 				                     (String)req.getParameter("latField"),(String)req.getParameter("lngField"));
 			
-			resp.sendRedirect("/editUser");
+//			resp.sendRedirect("/editUser");
+			resp.sendRedirect("/dashboard");
 			
 		}catch(SQLException sql){
 			req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);
