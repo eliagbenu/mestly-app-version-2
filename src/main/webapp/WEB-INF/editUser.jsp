@@ -93,7 +93,6 @@
 				<form action="/updateLocation" method="post" class="form-horizontal" role="form">
 					<div class="col-md-10 col-md-offset-2">
 						<h2 class="form-signin-heading">Update location</h2>	
-						Location is ${user.locationCo_ordinates}  
 
 						<c:choose>
 						  <c:when test="${user.locationCo_ordinates.get(0) == null }">
@@ -101,7 +100,7 @@
 
 						  </c:when>
 						  <c:otherwise>
-						    <p class='my_info'> Update your location from latitude ${user.locationCo_ordinates.get(0)} and longitude ${user.locationCo_ordinates.get(1)}</p>						  
+						    <div class='my_info'>Update your location from latitude ${user.locationCo_ordinates.get(0)} and longitude ${user.locationCo_ordinates.get(1)}</div>						  
 						  </c:otherwise>
 						</c:choose>
 

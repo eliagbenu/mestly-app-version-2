@@ -13,7 +13,7 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRHivIhkXUKCEKeED6vH8kqh2uyCLnQ4Y&sensor=true">
     </script>
-    <script src="/static/js/js_google_map_eli.js" type="text/javascript"></script>   
+ 
 
   <link href="/static/css/google_map_eli.css" rel="stylesheet" type="text/css">    
 
@@ -24,9 +24,16 @@
     <div class="jumbotron">
     	<div class="row">
 	      <div class="col-sm-12">
-		      	<div id="map-canvas">
+            <h2 class="form-signin-heading">View Profile</h2>  
 
-            </div>
+            <input type="hidden" id="Init1_latField" value="${user.locationCo_ordinates.get(0)}">
+            <input type="hidden" id="Init1_lngField" value="${user.locationCo_ordinates.get(1)}">
+
+            <script src="/static/js/js_google_plain_map_eli.js" type="text/javascript"></script>                   
+            <div id="map-canvas">
+            </div>    
+
+          </div>
 	      </div>
     	</div>
       

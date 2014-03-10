@@ -584,8 +584,6 @@ public class UserManager{
 
             user.setLocationCo_ordinates(locationCo_ordinates);
 
-            System.out.println("The new location is "+locationCo_ordinates);
-
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
             throw sqlEx;

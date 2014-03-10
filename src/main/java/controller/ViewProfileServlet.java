@@ -19,10 +19,21 @@ public class ViewProfileServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 		throws ServletException, IOException{
-		//	String username =   req.getPathInfo();	
-		//	username = username.substring(1);
 
-		req.getRequestDispatcher("/WEB-INF/userProfile.jsp").forward(req, resp); 
+		try{
+			if(req.getSession().getAttribute("username") != null){
+				User user = UserManager.getUser((String)req.getSession().getAttribute("username"));
+				req.setAttribute("user",user);
+				req.getRequestDispatcher("/WEB-INF/userProfile.jsp").forward(req, resp); 			
+			}else{
+				resp.sendRedirect("/signin?next="+req.getRequestURI());
+			}
+		}catch(SQLException sql){
+			req.getRequestDispatcher("WEB-INF/404.jsp").forward(req,resp);
+			return;
+		}
+
+
 	}
 
 }

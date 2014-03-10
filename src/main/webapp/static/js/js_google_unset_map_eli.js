@@ -4,9 +4,20 @@ var markersArray = [];
 function initialize()
 {
 
-
     var Init_latField = document.getElementById("Init_latField").value;
     var Init_lngField = document.getElementById("Init_lngField").value;
+    var unset_map_co;
+
+    if(Init_latField.length==0 )
+    { 
+        Init_latField = 5.552281; 
+        Init_lngField = -0.202196; 
+        unset_map_co = false;
+    }else{
+        unset_map_co = true;
+    }
+
+
 
 	var latlng = new google.maps.LatLng(Init_latField, Init_lngField);	    
     var myOptions = {
@@ -16,10 +27,13 @@ function initialize()
     };
     map = new google.maps.Map(document.getElementById("unset-map-canvas"), myOptions);
 
-    var marker = new google.maps.Marker({
-        position: latlng, 
-        map: map
-    });
+    if(unset_map_co){
+        var marker = new google.maps.Marker({
+            position: latlng, 
+            map: map
+        });    
+    markersArray.push(marker);            
+    }
 
     // add a click event handler to the map object
     google.maps.event.addListener(map, "click", function(event)
