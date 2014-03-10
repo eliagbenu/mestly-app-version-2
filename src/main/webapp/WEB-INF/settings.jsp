@@ -6,12 +6,14 @@
 	<link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="static/css/stylesheet.css" rel="stylesheet" media="screen">
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>	
+    <script src="static/js/bootstrap.min.js" type="text/javascript"></script>	    
+
 </head>
 <body> 
 	<c:import url="header.jsp"/>
 	<div class="container">
 
-		Modal Box - upon clicking the “Delete Account” button, trigger a modal box to pop up asking the user if he/she is sure about deleting the account (possible options should be “Yes” or “No”) then continue to process the delete account functionality based upon the user’s answer.
+		
 
 		<div class ="jumbotron">			
 			<div class="row">
@@ -53,7 +55,41 @@
 					<hr>
 					<h2 class="form-signin-heading">Delete Account</h2>			
 					<p class="text-center">This step cannot be undone</p>
-					<a type="button" class="btn btn-danger btn-lg btn-block" href="/delete">Delete</a>
+
+				<!--	<a type="button" class="btn btn-danger btn-lg btn-block" href="/delete">Delete</a>
+				-->
+					<!-- Button trigger modal -->
+					<a type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#myModal">
+					  Delete
+					</a>
+
+					<!-- start of Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					      </div>
+					      <div class="modal-body">
+					        Are you sure you want to delete your account?
+
+					      </div>
+					      <div class="modal-footer">
+					        <form action="/delete"> 
+					        	<input type="submit" class="btn btn-danger btn-block" value="Yes">
+					        </form>					      	
+					        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
+
+<!--					        <button type="button" class="btn btn-primary">Save changes</button> -->
+
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					<!-- end of Modal -->
+
+
 				</div>
 
 				<div class="col-md-7 col-md-offset-1">
