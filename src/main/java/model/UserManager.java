@@ -37,18 +37,25 @@ public class UserManager{
         String password=user.getPassword();
 
         try{
+            //insert 1
             String statement = "INSERT INTO users(first_name,last_name,email,password,username)"+
                                "VALUES(?, ?, ?, ?, ?)";
-
             pst = con.prepareStatement(statement);
-
             pst.setString(1, first_name);
             pst.setString(2, last_name);                    
             pst.setString(3, email);                    
             pst.setString(4, password);                    
             pst.setString(5, username);                    
-
             pst.executeUpdate();        
+
+            //insert 2
+            statement = "INSERT INTO user_location(username)"+
+                               " VALUES(?)";
+            pst = con.prepareStatement(statement);
+
+            pst.setString(1, username);                    
+            pst.executeUpdate();                    
+
         }catch(SQLException sqlEx){
             sqlEx.printStackTrace();
             throw sqlEx;

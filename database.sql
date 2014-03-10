@@ -31,19 +31,6 @@ PRIMARY KEY(username)
 );
 
 
-/*create a trigger*/
-CREATE OR REPLACE FUNCTION user_location_insert() RETURNS TRIGGER AS $user_location_insert$ 
-BEGIN
-IF(TG_OP='INSERT') THEN
-INSERT INTO user_location(username)
-       VALUES (NEW.username);
-END IF;
-RETURN NEW;
-END;
-$user_location_insert$ LANGUAGE plpgsql;
-
-CREATE TRIGGER user_location_insert AFTER INSERT ON users
-FOR EACH ROW EXECUTE PROCEDURE user_location_insert();
 
 /*insert queries start here*/
 
@@ -66,5 +53,15 @@ VALUES
 INSERT INTO users (username,email,password,first_name,last_name,one_liner,short_bio,following,theme_id) 
 VALUES 
 ('jackson','jackson@gm.com','123456','Jackson','Agbenu','An EIT','An EIT at East Legon','1,3',1);
+
+
+
+INSERT INTO user_location (username) VALUES ('samuel');
+INSERT INTO user_location (username) VALUES ('tony');
+INSERT INTO user_location (username) VALUES ('andre');
+INSERT INTO user_location (username) VALUES ('anthony');
+INSERT INTO user_location (username) VALUES ('jackson');
+
+
 
 
